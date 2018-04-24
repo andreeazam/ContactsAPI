@@ -21,7 +21,6 @@ public class Contact {
 	private String email;
 	private int mobileNumber;
 	private String password;
-//	private HashMap<Skill,Level> contactSkills;
 	
 	public Contact(){}
 	public Contact(int contactId){
@@ -42,7 +41,6 @@ public class Contact {
 		this.email = email;
 		this.mobileNumber = mobileNumber;
 		this.password = password;
-	//	this.contactSkills = contactSkills;
 		
 	}
 
