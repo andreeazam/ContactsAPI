@@ -26,9 +26,9 @@ public class ContactController {
 		return this.contactService.getAllContacts();
 	}
 	
-	@PutMapping(value = "/{contactId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void updateContact(@RequestBody Contact contact, @PathVariable("contactId") int contactId){
-		contactService.updateContact(contact, contactId);
+	@PutMapping(value = "/{currentUserId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void updateContact(@RequestBody Contact contact, @PathVariable("contactId") int currentUserId){
+		contactService.updateContact(contact, currentUserId);
 	}
 	
 	@RequestMapping(value = "/{contactId}", method = RequestMethod.GET)

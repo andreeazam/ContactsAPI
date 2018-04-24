@@ -15,6 +15,7 @@ import com.contactapi.contactapp.entity.ContactSkill;
 import com.contactapi.contactapp.entity.Level;
 import com.contactapi.contactapp.entity.Skill;
 
+@Primary
 @Repository
 @Qualifier("ContactDaoImpl")
 public class ContactDaoImpl implements ContactDao{
@@ -31,6 +32,7 @@ public class ContactDaoImpl implements ContactDao{
 			{
 			put(1, new Contact(1,"James","Anne","JamesAnne","Lausanne","james@gmail.com", 4567543,"1234"));
 			put(2, new Contact(2,"Peter","Clark","PeterClark","Zurich","clark@gmail.com", 646468,"1235"));
+			put(3, new Contact(3,"Susan","Terrance","SusanTerrance","Zurich","susan@gmail.com", 646468,"1235"));
 				}
 			};
 	}

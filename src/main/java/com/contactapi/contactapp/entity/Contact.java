@@ -1,16 +1,5 @@
 package com.contactapi.contactapp.entity;
 
-/* contactid
- * firstname
- * lastname
- * fullname
- * adress
- * email
- * mobilenumber
- * password
- * Skills
- * */
-
 public class Contact {
 	
 	private int contactId;
@@ -107,14 +96,5 @@ public class Contact {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	/*public HashMap<Skill, Level> getContactSkills() {
-		return contactSkills;
-	}
-
-	public void setContactSkills(HashMap<Skill, Level> contactSkills) {
-		this.contactSkills = contactSkills;
-	}
-	*/
 }
 

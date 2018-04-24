@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.contactapi.contactapp.entity.ContactSkill;
 import com.contactapi.contactapp.entity.Level;
 import com.contactapi.contactapp.entity.Skill;
 import com.contactapi.contactapp.service.SkillService;
@@ -31,22 +31,22 @@ public class SkillController {
 	}  
 	
 	@RequestMapping(value = "/{contactId}",  method = RequestMethod.GET)
-	public HashMap<String, Level> getSkillsByContactID(@PathVariable("contactId") int contactID){	
-		return skillService.getSkillsByContactID(contactID);
+	public HashMap<String, Level> getSkillsByContactID(@PathVariable("contactId") int contactId){	
+		return skillService.getSkillsByContactID(contactId);
 	}
 	
 	@PutMapping(value = "/{contactId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void updateSkill(@RequestBody HashMap<Integer,HashMap<String,Level>> skills, @PathVariable("contactId") Integer contactId){
-		skillService.updateSkill(skills, contactId);
+	public void updateSkillForContact(@RequestBody ContactSkill skill, @PathVariable("contactId") Integer contactId){
+		skillService.updateSkillForContact(skill, contactId);
 	}
 	
 	@RequestMapping(value = "/{contactId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void addSkillToContact(@RequestBody HashMap<String, Level> skillHash, @PathVariable("contactId") Integer contactId){
-		skillService.addSkillToContact(skillHash, contactId);
+	public void addSkillToContact(@RequestBody ContactSkill contactSkill, @PathVariable("contactId") Integer contactId){
+		skillService.addSkillToContact(contactSkill, contactId);
 	}
 	
 	@RequestMapping(value = "/{contactid}", method = RequestMethod.DELETE)
-	public void deleteSkillForContact(@PathVariable("contactid") Integer contactid, @RequestBody String skillName){
+	public void deleteSkillForContact(@PathVariable("contactid") Integer contactid, @RequestBody Skill skillName){
 		 this.skillService.deleteSkillForContact(contactid, skillName);
 	} 
 	

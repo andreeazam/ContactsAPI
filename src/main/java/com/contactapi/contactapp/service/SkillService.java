@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.contactapi.contactapp.dao.SkillDao;
+import com.contactapi.contactapp.entity.ContactSkill;
 import com.contactapi.contactapp.entity.Level;
 import com.contactapi.contactapp.entity.Skill;
 
@@ -26,16 +27,16 @@ public class SkillService {
 		return this.skillDao.getSkills();
 	}
 	
-	public void updateSkill(HashMap<Integer, HashMap<String, Level>> skills, int contactId){
-		this.skillDao.updateSkill(skills, contactId);
+	public void updateSkillForContact(ContactSkill contactSkill, int contactId){
+		this.skillDao.updateSkillForContact(contactSkill, contactId);
 	}
 
-	public void addSkillToContact(HashMap<String, Level> skillHash, Integer contactId) {
-		this.skillDao.addSkillToContact(skillHash, contactId);
+	public void addSkillToContact(ContactSkill contactSkill, Integer contactId) {
+		this.skillDao.addSkillToContact(contactSkill, contactId);
 		
 	}
 
-	public void deleteSkillForContact(int contactId, String skillName) {
+	public void deleteSkillForContact(int contactId, Skill skillName) {
 		this.skillDao.deleteSkillForContact(contactId, skillName);
 		
 	}

@@ -10,7 +10,7 @@ import com.contactapi.contactapp.dao.ContactDao;
 import com.contactapi.contactapp.entity.Contact;
 
 @Service
-@Qualifier("ContactDaloImpl")
+@Qualifier("ContactDaoImpl")
 public class ContactService {
 	
 	@Autowired	

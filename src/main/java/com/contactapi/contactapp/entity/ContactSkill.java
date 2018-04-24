@@ -1,25 +1,15 @@
 package com.contactapi.contactapp.entity;
 
 public class ContactSkill {
-	int contactId;
 	Skill skill;
 	Level level;
 	
 	public ContactSkill(){}
 	
-	public ContactSkill(int contactId, Skill skill, Level level){
-		this.contactId = contactId;
+	public ContactSkill(Skill skill, Level level){
+
 		this.skill = skill;
-		this.level = level;
-		
-	}
-
-	public int getContactId() {
-		return contactId;
-	}
-
-	public void setContactId(int contactId) {
-		this.contactId = contactId;
+		this.level = level;	
 	}
 
 	public Skill getSkill() {
@@ -37,5 +27,4 @@ public class ContactSkill {
 	public void setLevel(Level level) {
 		this.level = level;
 	}
-
 }

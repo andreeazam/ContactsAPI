@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.contactapi.contactapp.entity.Contact;
+import com.contactapi.contactapp.entity.ContactSkill;
 import com.contactapi.contactapp.entity.Level;
 import com.contactapi.contactapp.entity.Skill;
 
@@ -17,12 +18,13 @@ import com.contactapi.contactapp.entity.Skill;
 public class SkillDaoImpl implements SkillDao{
 	static HashMap<Integer, Contact> contacts = ContactDaoImpl.contacts;
 	private static HashMap<Integer, HashMap<String, Level>> skills;
-	private static int loginId;
-	//private static HashSet <Skill> entitySkills;
 	private static List<Skill> entitySkills = new ArrayList<Skill>();
-	private static Skill skill;
+	private static HashMap<Integer, List<ContactSkill>> contactSkills ;
+	private ContactSkill contactSkill;
+	
 	
 	static{
+		
 		entitySkills = new ArrayList<Skill>(){
 			{
 				add(new Skill("Ruby"));
@@ -31,7 +33,12 @@ public class SkillDaoImpl implements SkillDao{
 			}
 		};
 		
-		skills = new HashMap<Integer, HashMap<String, Level>> (){
+		skills = new HashMap<Integer, HashMap<String, Level>>(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			{   
 				{
 					HashMap<String,Level> skillHash = new HashMap<String,Level>();
@@ -48,6 +55,27 @@ public class SkillDaoImpl implements SkillDao{
 				}
 			}
 		};	
+		
+		contactSkills = new HashMap<Integer, List<ContactSkill>>(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			{	List<ContactSkill> cskills = new ArrayList<ContactSkill>();
+				cskills.add(new ContactSkill(entitySkills.get(0),Level.BEGINNER));
+				cskills.add(new ContactSkill(entitySkills.get(1),Level.INTERMEDIATE));
+				cskills.add(new ContactSkill(entitySkills.get(2),Level.BEGINNER));
+				put(contacts.get(1).getContactId(), cskills);
+			
+				cskills = new ArrayList<ContactSkill>();
+				cskills.add(new ContactSkill(entitySkills.get(0),Level.ADVANCED));
+				cskills.add(new ContactSkill(entitySkills.get(1),Level.ADVANCED));
+				cskills.add(new ContactSkill(entitySkills.get(2),Level.ADVANCED));
+				put(contacts.get(2).getContactId(), cskills);
+			
+			}
+		};
 	}
 
 	@Override
@@ -66,25 +94,25 @@ public class SkillDaoImpl implements SkillDao{
 	}
 
 	@Override
-	public void updateSkill(HashMap<Integer,HashMap<String, Level>> skill,int contactId) {
+	public void updateSkillForContact(ContactSkill contactSkill,int contactId) {
 		
-		HashMap<String,Level> skillHash = new HashMap<String,Level>();
-		skillHash = skill.get(contactId);
-
-		if(contacts.containsKey(contactId)){
+		HashMap<String,Level> skillHash = skills.get(contactId);
+		skillHash.put(contactSkill.getSkill().getName(), contactSkill.getLevel());
+		 
+		if(skills.containsKey(contactId)){
 			this.skills.put(contactId, skillHash);
-		}else{
+		}else{ 
 			System.out.println("No such contact");
 		}
 	}
 
 	@Override
-	public void addSkillToContact(HashMap<String, Level> skillHash, Integer contactId) {
+	public void addSkillToContact(ContactSkill skill, Integer contactId) {
 		
 
 		HashMap<String,Level> contactSkills = getSkillsByContactID(contactId);
-		Skill skillEntity = new Skill(skillHash.keySet().toString().substring(1, skillHash.keySet().toString().length()-1));
-		Level level = skillHash.get(skillEntity.getName());
+		Skill skillEntity = new Skill(skill.getSkill().getName());
+		Level level = skill.getLevel();
 		Contact c = new Contact(contactId);
 
 		// Adds new skill to entity skill list if it does not exist:
@@ -101,10 +129,10 @@ public class SkillDaoImpl implements SkillDao{
 	}
 
 	@Override
-	public void deleteSkillForContact(Integer contactId, String skillName) {
-		String skill = skillName.substring(14, skillName.length()-2);
+	public void deleteSkillForContact(Integer contactId, Skill skillName) {
+		Skill skill = new Skill(skillName.getName());///skillName.substring(14, skillName.length()-2);
 		try{
-		this.skills.get(contactId).remove(skill);
+		this.skills.get(contactId).remove(skill.getName());
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}

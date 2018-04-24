@@ -2,7 +2,6 @@ package com.contactapi.contactapp.entity;
 
 public class Skill {
 	String name;
-
 	
 	public Skill(){}
 	
