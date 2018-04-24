@@ -26,23 +26,24 @@ public class ContactController {
 		return this.contactService.getAllContacts();
 	}
 	
+	@RequestMapping(value = "/{contactId}", method = RequestMethod.GET)
+	public Contact getContactById(@PathVariable("contactId") int id){
+		return contactService.getContactById(id);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void insertContactInDb(@RequestBody Contact contact){
+		contactService.insertContactInDb(contact);
+	}
+	
 	@PutMapping(value = "/{currentUserId}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateContact(@RequestBody Contact contact, @PathVariable("contactId") int currentUserId){
 		contactService.updateContact(contact, currentUserId);
 	}
-	
-	@RequestMapping(value = "/{contactId}", method = RequestMethod.GET)
-	public Contact getContactById(@PathVariable("contactId") int id){
-		return contactService.getContactById(id);
-	}    
 	
 	@RequestMapping(value = "/{contactid}", method = RequestMethod.DELETE)
 	public void deleteContactById(@PathVariable("contactid") int contactid){
 		 this.contactService.deleteContactById(contactid);
 	}    
 	
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void insertContactInDb(@RequestBody Contact contact){
-		contactService.insertContactInDb(contact);
-	}
 }
