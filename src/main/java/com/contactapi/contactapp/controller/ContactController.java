@@ -37,7 +37,7 @@ public class ContactController {
 	}
 	
 	@PutMapping(value = "/{currentUserId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void updateContact(@RequestBody Contact contact, @PathVariable("contactId") int currentUserId){
+	public void updateContact(@RequestBody Contact contact, @PathVariable("currentUserId") int currentUserId){
 		contactService.updateContact(contact, currentUserId);
 	}
 	
@@ -45,5 +45,4 @@ public class ContactController {
 	public void deleteContactById(@PathVariable("contactid") int contactid){
 		 this.contactService.deleteContactById(contactid);
 	}    
-	
 }

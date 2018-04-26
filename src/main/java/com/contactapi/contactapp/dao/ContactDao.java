@@ -8,7 +8,7 @@ public interface ContactDao {
 
 	Collection<Contact> getAllContacts();
 
-	void updateContact(Contact contact, int contactId);
+	void updateContact(Contact contact, int currentUserId);
 
 	Contact getContactById(int contactid);
 

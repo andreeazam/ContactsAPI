@@ -20,8 +20,8 @@ public class ContactService {
 		return this.contactDao.getAllContacts();
 	}
 	
-	public void updateContact(Contact contact, int contactId){
-		this.contactDao.updateContact(contact, contactId);
+	public void updateContact(Contact contact, int currentUserId){
+		this.contactDao.updateContact(contact, currentUserId);
 	}
 	
 	public Contact getContactById(int id){

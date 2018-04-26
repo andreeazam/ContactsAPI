@@ -36,22 +36,17 @@ public class ContactDaoImpl implements ContactDao{
 				}
 			};
 	}
-	/* (non-Javadoc)
-	 * @see com.contactapi.contactapp.dao.ContactDao#getAllContacts()
-	 */
+
 	@Override
 	public Collection <Contact> getAllContacts(){
 		return this.contacts.values();
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.contactapi.contactapp.dao.ContactDao#updateContact(com.Id.contactapp.entity.Contact)
-	 */
+
 	@Override
-	public void updateContact(Contact contact, int contactId) {
+	public void updateContact(Contact contact, int currentUserId) {
 
 		Contact c = contacts.get(contact.getContactId());
-		if (c.getContactId()==(contactId)){
+		if (contacts.containsKey(currentUserId)&&c.getContactId()==(currentUserId)){
 			c.setFirstName(contact.getFirstName());
 			c.setLastName(contact.getLastName());
 			c.setFullName(contact.getFullName());
@@ -64,28 +59,32 @@ public class ContactDaoImpl implements ContactDao{
 			System.out.println("Can only update User contact!");
 		}
 	}
-		
-	/* (non-Javadoc)
-	 * @see com.contactapi.contactapp.dao.ContactDao#getContactById(int)
-	 */
+
 	@Override
-	public Contact getContactById(int contactid) {
-		return this.contacts.get(contactid);
+	public Contact getContactById(int contactId) {
+		if (contacts.containsKey(contactId)){
+			return this.contacts.get(contactId);
+		}else{
+			System.out.println("No such contact");
+			return null;
+		}
 	}	
-	
-	/* (non-Javadoc)
-	 * @see com.contactapi.contactapp.dao.ContactDao#deleteContactById(int)
-	 */
+
 	@Override
-	public void deleteContactById(int contactid){
-		this.contacts.remove(contactid);
+	public void deleteContactById(int contactId){
+		if(contacts.containsKey(contactId)){
+			this.contacts.remove(contactId);
+		}else{
+			System.out.println("No such contact");
+		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.contactapi.contactapp.dao.ContactDao#insertContactInDb(com.contactapi.contactapp.entity.Contact)
-	 */
 	@Override
 	public void insertContactInDb(Contact contact) {
-		this.contacts.put(contact.getContactId(), contact);		
+		if (!this.contacts.containsKey(contact.getContactId())){
+			this.contacts.put(contact.getContactId(), contact);		
+		}else{
+			System.out.print("Contact with id "+ contact.getContactId() + " already exists!");
+		}
 	}
 }
