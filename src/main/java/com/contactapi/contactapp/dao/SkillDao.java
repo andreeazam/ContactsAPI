@@ -10,7 +10,7 @@ import com.contactapi.contactapp.entity.Skill;
 
 public interface SkillDao {
 	
-	HashMap<Integer, HashMap<String, Level>> getSkills();
+	HashMap<Integer, HashMap<String, Level>> getAllSkillsContactIDs();
 
 	void updateSkillForContact(ContactSkill contactSkill, int contactId);
 
@@ -20,5 +20,5 @@ public interface SkillDao {
 	
 	void deleteSkillForContact(Integer contactId, Skill skillName);
 
-	List<Skill> getAllEntitySkills();
+	List<Skill> getAllSkills();
 }

@@ -23,8 +23,8 @@ public class SkillService {
 		return this.skillDao.getSkillsByContactID(contactID);
 	}
 	
-	public HashMap<Integer, HashMap<String, Level>> getSkills(){
-		return this.skillDao.getSkills();
+	public HashMap<Integer, HashMap<String, Level>> getAllSkillsContactIDs(){
+		return this.skillDao.getAllSkillsContactIDs();
 	}
 	
 	public void updateSkillForContact(ContactSkill contactSkill, int contactId){
@@ -41,8 +41,8 @@ public class SkillService {
 		
 	}
 	
-	public List<Skill> getAllEntitySkills(){
-		return this.skillDao.getAllEntitySkills();
+	public List<Skill> getAllSkills(){
+		return this.skillDao.getAllSkills();
 	}
 	
 }

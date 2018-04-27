@@ -26,8 +26,8 @@ public class SkillController {
 	private SkillService skillService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public HashMap<Integer, HashMap<String, Level>> getSkills(){	
-		return skillService.getSkills();
+	public HashMap<Integer, HashMap<String, Level>> getAllSkillsContactIDs(){	
+		return skillService.getAllSkillsContactIDs();
 	}  
 	
 	@RequestMapping(value = "/{contactId}",  method = RequestMethod.GET)
@@ -51,7 +51,7 @@ public class SkillController {
 	} 
 	
 	@RequestMapping(value = "/entities", method = RequestMethod.GET)
-	public List<Skill> getAllEntitySkills(){
-		return this.skillService.getAllEntitySkills();
+	public List<Skill> getAllSkills(){
+		return this.skillService.getAllSkills();
 	}
 }

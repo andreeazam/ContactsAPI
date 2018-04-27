@@ -57,12 +57,12 @@ public class SkillDaoImpl implements SkillDao{
 	}
 
 	@Override
-	public HashMap<Integer, HashMap<String, Level>> getSkills() {
+	public HashMap<Integer, HashMap<String, Level>> getAllSkillsContactIDs() {
 		return this.allSkillsContacts;
 	}
 	
 	@Override
-	public List<Skill> getAllEntitySkills() {
+	public List<Skill> getAllSkills() {
 		return this.skillsList;
 	}
 
@@ -109,6 +109,7 @@ public class SkillDaoImpl implements SkillDao{
 		if(contactSkill.containsKey(skillName)){
 		try{
 			this.allSkillsContacts.get(contactId).remove(skill.getName());
+			System.out.println("Deleted skill "+ skillName+ " for "+ contacts.get(contactId).getFullName());
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
