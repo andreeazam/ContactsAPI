@@ -21,18 +21,15 @@ import com.contactapi.contactapp.entity.Skill;
 public class ContactDaoImpl implements ContactDao{
 	
     static HashMap<Integer, Contact> contacts;
-	private static HashMap<Integer, HashMap<String, Level>> skills;
-	private static int loginId;
-	private static HashMap <Integer, Skill> entitySkills;
-	private static Skill skill;
+	static HashMap<Integer, HashMap<String,Level>> allSkillsContacts;
 
 	static{	
 			
 		contacts = new HashMap<Integer, Contact>(){
 			{
 			put(1, new Contact(1,"James","Anne","JamesAnne","Lausanne","james@gmail.com", 4567543,"1234"));
-			put(2, new Contact(2,"Peter","Clark","PeterClark","Zurich","clark@gmail.com", 646468,"1235"));
-			put(3, new Contact(3,"Susan","Terrance","SusanTerrance","Zurich","susan@gmail.com", 646468,"1235"));
+			put(2, new Contact(2,"Peter","Clark","PeterClark","Zurich","peter@gmail.com", 646468,"1235"));
+			put(3, new Contact(3,"Susan","Terrance","SusanTerrance","Bucharest","susan@gmail.com", 646468,"1235"));
 				}
 			};
 	}
@@ -56,7 +53,7 @@ public class ContactDaoImpl implements ContactDao{
 			c.setPassword(contact.getPassword());
 		contacts.put(contact.getContactId(), contact);
 		}else{
-			System.out.println("Can only update User contact!");
+			System.out.println("Can only update valid User contact!");
 		}
 	}
 
@@ -72,13 +69,19 @@ public class ContactDaoImpl implements ContactDao{
 
 	@Override
 	public void deleteContactById(int contactId){
-		if(contacts.containsKey(contactId)){
+		if(this.contacts.containsKey(contactId)){
 			this.contacts.remove(contactId);
+			
+			if(SkillDaoImpl.allSkillsContacts.containsKey(contactId)){
+			///	System.out.println("Deleted skills for contact "+ contacts.get(contactId).getFullName());
+
+				SkillDaoImpl.allSkillsContacts.remove(contactId);
+						}
 		}else{
 			System.out.println("No such contact");
 		}
 	}
-
+		
 	@Override
 	public void insertContactInDb(Contact contact) {
 		if (!this.contacts.containsKey(contact.getContactId())){

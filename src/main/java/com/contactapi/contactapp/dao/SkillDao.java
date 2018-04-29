@@ -2,6 +2,7 @@ package com.contactapi.contactapp.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.contactapi.contactapp.entity.ContactSkill;
 import com.contactapi.contactapp.entity.Level;
@@ -10,7 +11,7 @@ import com.contactapi.contactapp.entity.Skill;
 
 public interface SkillDao {
 	
-	HashMap<Integer, HashMap<String, Level>> getAllSkillsContactIDs();
+	HashMap<String, HashMap<String, Level>> getAllSkillsContacts();
 
 	void updateSkillForContact(ContactSkill contactSkill, int contactId);
 
@@ -21,4 +22,6 @@ public interface SkillDao {
 	void deleteSkillForContact(Integer contactId, Skill skillName);
 
 	List<Skill> getAllSkills();
+	
+	public HashMap<String,Level> getContactsAndLevelsBySkill(String skill);
 }

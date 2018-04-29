@@ -2,6 +2,7 @@ package com.contactapi.contactapp.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,8 +24,8 @@ public class SkillService {
 		return this.skillDao.getSkillsByContactID(contactID);
 	}
 	
-	public HashMap<Integer, HashMap<String, Level>> getAllSkillsContactIDs(){
-		return this.skillDao.getAllSkillsContactIDs();
+	public HashMap<String, HashMap<String, Level>> getAllSkillsContacts(){
+		return this.skillDao.getAllSkillsContacts();
 	}
 	
 	public void updateSkillForContact(ContactSkill contactSkill, int contactId){
@@ -43,6 +44,10 @@ public class SkillService {
 	
 	public List<Skill> getAllSkills(){
 		return this.skillDao.getAllSkills();
+	}
+	
+	public HashMap<String,Level> getContactsAndLevelsBySkill(String skill){
+		return this.skillDao.getContactsAndLevelsBySkill(skill);
 	}
 	
 }
