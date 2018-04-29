@@ -76,7 +76,6 @@ public class SkillDaoImpl implements SkillDao{
 		Map<String, HashMap<String, Level>> result = this.allSkillsContacts							
 				.entrySet()
 				.stream()	
-				//.filter(x->contacts.get(x)!=null)
 				.collect(Collectors.toMap(x->contacts.get(x.getKey()).getFullName().toString(), x -> this.allSkillsContacts.get(x.getKey())));
 
 		return (HashMap<String, HashMap<String,Level>>) result;
