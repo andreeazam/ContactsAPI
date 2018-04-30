@@ -2,10 +2,8 @@ package com.contactapi.contactapp.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +13,6 @@ import com.contactapi.contactapp.entity.Contact;
 import com.contactapi.contactapp.entity.ContactSkill;
 import com.contactapi.contactapp.entity.Level;
 import com.contactapi.contactapp.entity.Skill;
-import com.google.common.base.Objects;
 
 @Repository
 @Qualifier("SkillDaoImpl")
@@ -34,6 +31,7 @@ public class SkillDaoImpl implements SkillDao{
 				add(new Skill("Java"));
 			}
 		};
+
 		
 		allSkillsContacts = new HashMap<Integer, HashMap<String, Level>>(){
 
@@ -111,16 +109,19 @@ public class SkillDaoImpl implements SkillDao{
 			}else{
 				 contactSkills = new HashMap<String,Level>();
 			}
-	
-	
+	       
 			// Adds new skill to skill list if it does not exist:
-			if(!this.skillsList.contains(skillEntity)){
-				this.skillsList.add(skillEntity);
+			long c = SkillDaoImpl.skillsList.stream()
+					.filter(skill -> skill.getName().equals(skillEntity.getName()))
+					.count();
+
+			if(c == 0){
+				SkillDaoImpl.skillsList.add(skillEntity);
 			}
 			//Adds new skill to contacts skills
 			if(!contactSkills.containsKey(skillEntity.getName())){
 				contactSkills.put(skillEntity.getName(), level);
-				this.allSkillsContacts.put(contactId, contactSkills);
+				SkillDaoImpl.allSkillsContacts.put(contactId, contactSkills);
 			}else{
 				System.out.println("Skill "+ skillEntity.getName()+" already exists for "+ contacts.get(contactId).getFullName());
 			}
